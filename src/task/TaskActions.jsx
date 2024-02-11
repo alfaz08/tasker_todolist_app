@@ -1,9 +1,10 @@
-const TaskActions = ({ onAddClick }) => {
+const TaskActions = ({ onAddClick, tasks }) => {
   return (
     <div>
       <div>
         <div className="mb-14 items-center justify-between sm:flex">
           <h2 className="text-2xl font-semibold max-sm:mb-4">Your Tasks</h2>
+          <div>Total Task: {tasks?.length}</div>
           <div className="flex items-center space-x-5">
             <button
               onClick={onAddClick}
@@ -12,7 +13,7 @@ const TaskActions = ({ onAddClick }) => {
               Add Task
             </button>
             <button className="rounded-md bg-red-500 px-3.5 py-2.5 text-sm font-semibold">
-              Delete All
+              Filter Based on Priority
             </button>
           </div>
         </div>
@@ -20,5 +21,4 @@ const TaskActions = ({ onAddClick }) => {
     </div>
   );
 };
-
 export default TaskActions;

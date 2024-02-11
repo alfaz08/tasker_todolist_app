@@ -1,6 +1,8 @@
+
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-const TaskList = ({ tasks }) => {
+
+const TaskList = ({ tasks, onEdit }) => {
   console.log(tasks);
   return (
     <div>
@@ -64,16 +66,14 @@ const TaskList = ({ tasks }) => {
                     </button>
                   )}
                 </td>
-
                 <td className="flex justify-center items-center">
-                  <button>
+                  <button onClick={() => onEdit(task)}>
                     <FaEdit className="text-2xl text-blue-500" />
                   </button>
                 </td>
-
                 <td className="text-center">
                   <div className="flex items-center justify-center space-x-3">
-                    <button className="text-amber-500">Completed</button>
+                    <button className="text-amber-300">Completed</button>
                     <button className="text-red-500">
                       <MdDelete className="text-2xl" />
                     </button>
@@ -87,4 +87,5 @@ const TaskList = ({ tasks }) => {
     </div>
   );
 };
+
 export default TaskList;
