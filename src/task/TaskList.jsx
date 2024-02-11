@@ -1,6 +1,8 @@
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-const TaskList = ({ tasks, onEdit, onDelete, selectedPriority }) => {
+import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
+import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
+const TaskList = ({ tasks, onEdit, onDelete, selectedPriority, onMark }) => {
   const filteredTasks =
     selectedPriority && selectedPriority === "All"
       ? tasks
@@ -75,12 +77,22 @@ const TaskList = ({ tasks, onEdit, onDelete, selectedPriority }) => {
                 </td>
                 <td className="flex justify-center items-center">
                   <button onClick={() => onEdit(task)}>
-                    <FaEdit className="text-2xl text-blue-500" />
+                    <FaEdit className="text-3xl text-blue-500" />
                   </button>
                 </td>
+
                 <td className="text-center">
                   <div className="flex items-center justify-center space-x-3">
-                    <button className="text-amber-300">Completed</button>
+                    <button
+                      onClick={() => onMark(task.id)}
+                      className="text-teal-300 "
+                    >
+                      {task.isComplete ? (
+                        <IoCheckmarkDoneCircleSharp className="text-3xl " />
+                      ) : (
+                        <IoCheckmarkDoneCircleOutline className="text-3xl " />
+                      )}
+                    </button>
                   </div>
                 </td>
                 <td className="flex justify-center items-center">
@@ -88,7 +100,7 @@ const TaskList = ({ tasks, onEdit, onDelete, selectedPriority }) => {
                     onClick={() => onDelete(task.id)}
                     className="text-red-500"
                   >
-                    <MdDelete className="text-2xl" />
+                    <MdDelete className="text-3xl" />
                   </button>
                 </td>
               </tr>
