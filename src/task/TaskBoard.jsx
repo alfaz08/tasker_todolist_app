@@ -9,7 +9,6 @@ const TaskBoard = () => {
   const [taskToUpdate, setTaskToUpdate] = useState(null);
   const [selectedPriority, setSelectPriority] = useState("");
   const [statusChange, setStatusChange] = useState(false);
-
   const handlePriorityFilterChange = (priority) => {
     setSelectPriority(priority);
   };
@@ -56,15 +55,16 @@ const TaskBoard = () => {
       );
     }
   };
-
   const handleDelete = (taskId) => {
     const tasksAfterDelete = tasks.filter((task) => task.id !== taskId);
     setTasks(tasksAfterDelete);
     localStorage.setItem("tasks", JSON.stringify(tasksAfterDelete));
   };
   useEffect(() => {
-    const addTask = JSON.parse(localStorage.getItem("tasks"));
-    setTasks(addTask);
+    const storedTasks = JSON.parse(localStorage.getItem("tasks"));
+    if (storedTasks && Array.isArray(storedTasks)) {
+      setTasks(storedTasks);
+    }
   }, []);
 
   console.log("addTask", tasks);
@@ -89,7 +89,7 @@ const TaskBoard = () => {
               onPriorityFilterChange={handlePriorityFilterChange}
               onAddClick={() => setShowAddModal(true)}
             />
-            {tasks.length > 0 ? (
+            {tasks?.length > 0 ? (
               <TaskList
                 tasks={tasks}
                 onMark={handleMark}

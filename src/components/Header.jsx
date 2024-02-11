@@ -6,7 +6,8 @@ const Header = () => {
 		<div className="container mx-auto flex items-center justify-between gap-x-6">
 
 			<a href="/">
-				<img className="h-[45px]" src="https://i.ibb.co/gdBD7c1/360-F-100656447-xza-Qm1-D1p6o-WUX4-WCBX7-Li-Dy-D8-Dw9s-Jw.jpg" alt="Lws" />
+      <img className="h-[45px]" src="https://i.ibb.co/wwFMY0Q/Facebook-Share.png" alt="todo" />
+
 			</a>
 
 		</div>
