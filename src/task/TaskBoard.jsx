@@ -26,10 +26,15 @@ const TaskBoard = () => {
     setTaskToUpdate(null);
     setShowAddModal(false);
   };
-
   const handleEdit = (task) => {
     setTaskToUpdate(task);
     setShowAddModal(true);
+  };
+
+  const handleDelete = (taskId) => {
+    const tasksAfterDelete = tasks.filter((task) => task.id !== taskId);
+    setTasks(tasksAfterDelete);
+    localStorage.setItem("tasks", JSON.stringify(tasksAfterDelete));
   };
 
   useEffect(() => {
@@ -41,7 +46,6 @@ const TaskBoard = () => {
     setShowAddModal(false);
     setTaskToUpdate(null);
   };
-
   return (
     <div>
       <section className="mb-20" id="tasks">
@@ -58,7 +62,11 @@ const TaskBoard = () => {
               tasks={tasks}
               onAddClick={() => setShowAddModal(true)}
             />
-            <TaskList tasks={tasks} onEdit={handleEdit} />
+            <TaskList
+              tasks={tasks}
+              onDelete={handleDelete}
+              onEdit={handleEdit}
+            />
           </div>
         </div>
       </section>
