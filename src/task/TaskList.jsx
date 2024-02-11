@@ -1,6 +1,5 @@
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-
 const TaskList = ({ tasks }) => {
   console.log(tasks);
   return (
@@ -20,7 +19,6 @@ const TaskList = ({ tasks }) => {
                 {" "}
                 Priority{" "}
               </th>
-
               <th className="p-4 pb-8 text-sm font-semibold capitalize md:w-[250px]">
                 {" "}
                 Edit Task{" "}
@@ -42,7 +40,31 @@ const TaskList = ({ tasks }) => {
                 <td className="text-center">
                   {task.isComplete ? "Completed" : "Not Completed"}
                 </td>
-                <td className="text-center">{task.priority}</td>
+                <td className="text-center">
+                  {task.priority === "High" ? (
+                    <button
+                      disabled
+                      className="bg-red-600 w-24 text-bl text-center rounded-lg"
+                    >
+                      High
+                    </button>
+                  ) : task.priority === "Low" ? (
+                    <button
+                      disabled
+                      className="bg-green-600 w-24 text-center rounded-lg"
+                    >
+                      Low
+                    </button>
+                  ) : (
+                    <button
+                      disabled
+                      className="bg-purple-600 w-24 text-center rounded-lg"
+                    >
+                      Medium
+                    </button>
+                  )}
+                </td>
+
                 <td className="flex justify-center items-center">
                   <button>
                     <FaEdit className="text-2xl text-blue-500" />
@@ -65,5 +87,4 @@ const TaskList = ({ tasks }) => {
     </div>
   );
 };
-
 export default TaskList;
