@@ -1,10 +1,15 @@
+import Footer from "./components/Footer"
+import Header from "./components/Header"
+import Hero from "./components/Hero"
 
 function App() {
  
 
   return (
     <>
-     <h2 className="text-4xl">Hello World</h2>
+     <Header></Header>
+     <Hero></Hero>
+     <Footer></Footer>
     </>
   )
 }
