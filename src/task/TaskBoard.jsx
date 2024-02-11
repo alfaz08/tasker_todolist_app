@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
 import AddTaskModal from "./AddTaskModal";
 import TaskActions from "./TaskActions";
 import TaskList from "./TaskList";
+import NoTaskFound from "./NoTaskFound";
+import { useEffect, useState } from "react";
+
 const TaskBoard = () => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [tasks, setTasks] = useState([]);
@@ -36,7 +38,6 @@ const TaskBoard = () => {
     setTasks(tasksAfterDelete);
     localStorage.setItem("tasks", JSON.stringify(tasksAfterDelete));
   };
-
   useEffect(() => {
     const addTask = JSON.parse(localStorage.getItem("tasks"));
     setTasks(addTask);
@@ -62,11 +63,15 @@ const TaskBoard = () => {
               tasks={tasks}
               onAddClick={() => setShowAddModal(true)}
             />
-            <TaskList
-              tasks={tasks}
-              onDelete={handleDelete}
-              onEdit={handleEdit}
-            />
+            {tasks.length > 0 ? (
+              <TaskList
+                tasks={tasks}
+                onDelete={handleDelete}
+                onEdit={handleEdit}
+              />
+            ) : (
+              <NoTaskFound />
+            )}
           </div>
         </div>
       </section>
