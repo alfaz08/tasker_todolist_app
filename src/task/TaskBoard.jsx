@@ -1,14 +1,17 @@
+import { useEffect, useState } from "react";
 import AddTaskModal from "./AddTaskModal";
 import TaskActions from "./TaskActions";
 import TaskList from "./TaskList";
 import NoTaskFound from "./NoTaskFound";
-import { useEffect, useState } from "react";
-
 const TaskBoard = () => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [tasks, setTasks] = useState([]);
   const [taskToUpdate, setTaskToUpdate] = useState(null);
+  const [selectedPriority, setSelectPriority] = useState("");
 
+  const handlePriorityFilterChange = (priority) => {
+    setSelectPriority(priority);
+  };
   const handleSave = (newTask, isAdd) => {
     if (isAdd) {
       setTasks((prevTasks) => {
@@ -61,11 +64,13 @@ const TaskBoard = () => {
           <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
             <TaskActions
               tasks={tasks}
+              onPriorityFilterChange={handlePriorityFilterChange}
               onAddClick={() => setShowAddModal(true)}
             />
             {tasks.length > 0 ? (
               <TaskList
                 tasks={tasks}
+                selectedPriority={selectedPriority}
                 onDelete={handleDelete}
                 onEdit={handleEdit}
               />

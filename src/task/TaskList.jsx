@@ -1,14 +1,20 @@
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-const TaskList = ({ tasks, onEdit, onDelete }) => {
-  console.log(tasks);
+const TaskList = ({ tasks, onEdit, onDelete, selectedPriority }) => {
+  const filteredTasks =
+    selectedPriority && selectedPriority === "All"
+      ? tasks
+      : selectedPriority
+      ? tasks.filter((task) => task.priority === selectedPriority)
+      : tasks;
+  console.log("filtered", filteredTasks);
   return (
     <div>
       <div className="overflow-auto">
         <table className="table-fixed overflow-auto xl:w-full">
           <thead>
             <tr>
-              <th className="p-4 pb-8 text-sm font-semibold capitalize w-[250px]">
+              <th className="p-4 pb-8 text-sm font-semibold capitalize w-[350px]">
                 {" "}
                 Title{" "}
               </th>
@@ -19,18 +25,22 @@ const TaskList = ({ tasks, onEdit, onDelete }) => {
                 {" "}
                 Priority{" "}
               </th>
-              <th className="p-4 pb-8 text-sm font-semibold capitalize md:w-[250px]">
+              <th className="p-4 pb-8 text-sm font-semibold capitalize md:w-[150px]">
                 {" "}
                 Edit Task{" "}
               </th>
               <th className="p-4 pb-8 text-sm font-semibold capitalize md:w-[250px]">
                 {" "}
-                Mark as{" "}
+                Mark as complete{" "}
+              </th>
+              <th className="p-4 pb-8 text-sm font-semibold capitalize md:w-[150px]">
+                {" "}
+                Delete{" "}
               </th>
             </tr>
           </thead>
           <tbody>
-            {tasks?.map((task) => (
+            {filteredTasks?.map((task) => (
               <tr
                 key={task.id}
                 className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-2 [&>td]:py-2"
@@ -71,13 +81,15 @@ const TaskList = ({ tasks, onEdit, onDelete }) => {
                 <td className="text-center">
                   <div className="flex items-center justify-center space-x-3">
                     <button className="text-amber-300">Completed</button>
-                    <button
-                      onClick={() => onDelete(task.id)}
-                      className="text-red-500"
-                    >
-                      <MdDelete className="text-2xl" />
-                    </button>
                   </div>
+                </td>
+                <td className="flex justify-center items-center">
+                  <button
+                    onClick={() => onDelete(task.id)}
+                    className="text-red-500"
+                  >
+                    <MdDelete className="text-2xl" />
+                  </button>
                 </td>
               </tr>
             ))}
